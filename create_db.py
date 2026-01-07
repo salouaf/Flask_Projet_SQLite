@@ -4,7 +4,8 @@ connection = sqlite3.connect('database.db')
 
 with open('schema.sql') as f:
     connection.executescript(f.read())
-# test
+#test
+#test
 cur = connection.cursor()
 
 cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('DUPONT', 'Emilie', '123, Rue des Lilas, 75001 Paris'))
