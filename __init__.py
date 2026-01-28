@@ -108,5 +108,16 @@ def fiche_nom_form():
         return redirect(url_for('fiche_nom_result', nom_client=nom_client))
 
     return render_template('formulaire_nom.html')
+
+
+#bibliotheque
+@app.route('/books')
+def list_books():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM books')
+    data = cursor.fetchall()
+    conn.close()
+    return render_template('read_data.html', data=data)
 if __name__ == "__main__":
   app.run(debug=True)
