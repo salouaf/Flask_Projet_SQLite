@@ -107,11 +107,6 @@ def fiche_nom_form():
         nom_client = request.form['nom_client']
         return redirect(url_for('fiche_nom_result', nom_client=nom_client))
 
-    return '''
-        <form method="post">
-            Nom du client: <input name="nom_client">
-            <input type="submit" value="Rechercher">
-        </form>
-    ...
+    return render_template('formulaire_nom.html')
 if __name__ == "__main__":
   app.run(debug=True)
