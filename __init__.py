@@ -27,16 +27,20 @@ def lecture():
 
 @app.route('/authentification', methods=['GET', 'POST'])
 def authentification():
-    if request.method == 'POST':
-        # Vérifier les identifiants
-        if request.form['username'] == 'admin' and request.form['password'] == 'password': # password à cacher par la suite
+     if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == 'user' and password == '12345':
             session['authentifie'] = True
-            # Rediriger vers la route lecture après une authentification réussie
+            session['role'] = 'user'
+            return redirect(url_for('fiche_nom_form'))  # vers le formulaire de recherche
+
+        # ici tu peux garder admin si tu veux
+        elif username == 'admin' and password == 'password':
+            session['authentifie'] = True
+            session['role'] = 'admin'
             return redirect(url_for('lecture'))
-        elif request.form['username'] == 'user' and request.form['password'] == '12345': # password à cacher par la suite
-            session['authentifie'] = True
-            # Rediriger vers la route lecture après une authentification réussie
-            return redirect(url_for('/fiche_nom/<string:nom_client>'))
         else :
             # Afficher un message d'erreur si les identifiants sont incorrects
             return render_template('formulaire_authentification.html', error=True)
@@ -81,12 +85,9 @@ def enregistrer_client():
     return redirect('/consultation/')  # Rediriger vers la page d'accueil après l'enregistrement
                                                                                                              
 @app.route('/fiche_nom/<string:nom_client>')
-def fiche_nom(nom_client):
-      if not est_authentifie():
- # Rediriger vers la page d'authentification si l'utilisateur n'est pas authentifié
+def fiche_nom_result(nom_client):
+    if not session.get('authentifie') or session.get('role') != 'user':
         return redirect(url_for('authentification'))
-
-# Si l'utilisateur est authentifié
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom_client,))
@@ -95,6 +96,21 @@ def fiche_nom(nom_client):
         # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
 
+#créer la route/fiche_nom avec formulaire
+@app.route('/fiche_nom', methods=['GET', 'POST'])
+def fiche_nom_form():
+    if not session.get('authentifie') or session.get('role') != 'user':
+        return redirect(url_for('authentification'))
+
+    if request.method == 'POST':
+        nom_client = request.form['nom_client']
+        return redirect(url_for('fiche_nom_result', nom_client=nom_client))
+
+    return '''
+        <form method="post">
+            Nom du client: <input name="nom_client">
+            <input type="submit" value="Rechercher">
+        </form>
 
 if __name__ == "__main__":
   app.run(debug=True)
