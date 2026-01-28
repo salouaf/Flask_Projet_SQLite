@@ -112,6 +112,6 @@ def fiche_nom_form():
             Nom du client: <input name="nom_client">
             <input type="submit" value="Rechercher">
         </form>
-
+        ...
 if __name__ == "__main__":
   app.run(debug=True)
