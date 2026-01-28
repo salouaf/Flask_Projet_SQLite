@@ -33,7 +33,7 @@ def authentification():
 
         if username == 'user' and password == '12345':
             session['authentifie'] = True
-            session['role'] = 'user' #ajout le role user
+            session['role'] = 'user'
             return redirect(url_for('fiche_nom_form'))  # vers le formulaire de recherche
         # ici tu peux garder admin si tu veux
         elif username == 'admin' and password == 'password':
