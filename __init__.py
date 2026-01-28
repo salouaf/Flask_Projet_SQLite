@@ -27,7 +27,7 @@ def lecture():
 
 @app.route('/authentification', methods=['GET', 'POST'])
 def authentification():
-     if request.method == 'POST':
+    if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
@@ -35,7 +35,6 @@ def authentification():
             session['authentifie'] = True
             session['role'] = 'user' #ajout le role user
             return redirect(url_for('fiche_nom_form'))  # vers le formulaire de recherche
-
         # ici tu peux garder admin si tu veux
         elif username == 'admin' and password == 'password':
             session['authentifie'] = True
@@ -44,7 +43,7 @@ def authentification():
         else :
             # Afficher un message d'erreur si les identifiants sont incorrects
             return render_template('formulaire_authentification.html', error=True)
-    return render_template('formulaire_authentification.html', error=False)
+return render_template('formulaire_authentification.html', error=False)
 
 @app.route('/fiche_client/<int:post_id>')
 def Readfiche(post_id):
