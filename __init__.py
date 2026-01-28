@@ -33,7 +33,7 @@ def authentification():
 
         if username == 'user' and password == '12345':
             session['authentifie'] = True
-            session['role'] = 'user'
+            session['role'] = 'user' #ajout le role user
             return redirect(url_for('fiche_nom_form'))  # vers le formulaire de recherche
 
         # ici tu peux garder admin si tu veux
@@ -88,15 +88,17 @@ def enregistrer_client():
 def fiche_nom_result(nom_client):
     if not session.get('authentifie') or session.get('role') != 'user':
         return redirect(url_for('authentification'))
+
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom_client,))
     data = cursor.fetchall()
     conn.close()
-        # Rendre le template HTML et transmettre les données
+
+    # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
 
-#créer la route/fiche_nom avec formulaire
+#créer la route/fiche_nom pour creer formulaire pour saisir le nom du client
 @app.route('/fiche_nom', methods=['GET', 'POST'])
 def fiche_nom_form():
     if not session.get('authentifie') or session.get('role') != 'user':
