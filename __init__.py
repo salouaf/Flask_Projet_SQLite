@@ -134,5 +134,51 @@ def lister_taches():
     # Ici, on peut renvoyer un template HTML pour afficher la liste
     return render_template('liste_taches.html', taches=data)
 
+@app.route('/tache/ajouter', methods=['GET', 'POST'])
+def ajouter_tache():
+    if request.method == 'POST':
+        nom = request.form['nom']
+        description = request.form['description']
+        date_echeance = request.form['date_echeance']
+        conn = sqlite3.connect('database_tache.db')
+        cur = conn.cursor()
+        cur.execute("INSERT INTO taches (nom, description, date_echeance, status) VALUES (?, ?, ?, 'Ouverte')",
+                    (nom, description, date_echeance))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('liste_taches'))
+    return render_template('ajouter_tache.html')
+
+# Détail d'une tâche
+@app.route('/tache/<int:id>')
+def detail_tache(id):
+    conn = sqlite3.connect('database_tache.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM taches WHERE id = ?", (id,))
+    tache = cur.fetchone()
+    conn.close()
+    return render_template('detail_tache.html', tache=tache)
+
+# Supprimer une tâche
+@app.route('/tache/<int:id>/supprimer', methods=['POST'])
+def supprimer_tache(id):
+    conn = sqlite3.connect('database_tache.db')
+    cur = conn.cursor()
+    cur.execute("DELETE FROM taches WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('liste_taches'))
+
+# Marquer comme terminée
+@app.route('/tache/<int:id>/terminer', methods=['POST'])
+def terminer_tache(id):
+    conn = sqlite3.connect('database_tache.db')
+    cur = conn.cursor()
+    cur.execute("UPDATE taches SET status='Terminée' WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('liste_taches'))
+
+
 if __name__ == "__main__":
   app.run(debug=True)
