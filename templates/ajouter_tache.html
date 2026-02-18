@@ -4,22 +4,53 @@
     <meta charset="UTF-8">
     <title>Ajouter une tâche</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f0f4f7; padding: 50px; }
-        form { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
-        button { background: #007BFF; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background: #0056b3; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
-    <h1 style="text-align:center;">Ajouter une tâche</h1>
-    <form method="post">
-        <label>Titre:</label>
-        <input type="text" name="nom" required>
-        <label>Description:</label>
-        <textarea name="description" required></textarea>
-        <label>Date d'échéance:</label>
-        <input type="date" name="date_echeance" required>
+    <form method="POST">
+        <h2>Ajouter une tâche</h2>
+        <input type="text" name="nom" placeholder="Titre de la tâche" required>
+        <textarea name="description" placeholder="Description de la tâche" rows="4" required></textarea>
         <button type="submit">Ajouter</button>
     </form>
 </body>
