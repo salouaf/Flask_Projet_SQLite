@@ -8,28 +8,69 @@
             font-family: Arial, sans-serif;
             background-color: #f7f9fc;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
         }
         h1 {
             text-align: center;
-            color: #2c3e50;
+            color: #333;
+            margin-bottom: 30px;
         }
         table {
-            width: 80%;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         th, td {
-            padding: 12px 15px;
             text-align: left;
+            padding: 12px;
         }
         th {
-            background-color: #3498db;
+            background-color: #4CAF50;
             color: white;
         }
-        tr:nth-child(even) {
-            background-color: #ecf0f1;
+        tr:nth-child(even){
+            background-color: #f2f2f2;
         }
         tr:hover {
-            background-color: #d
+            background-color: #ddd;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 15px 0;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Liste des tâches</h1>
+        <a href="{{ url_for('ajouter_tache_form') }}" class="btn">Ajouter une tâche</a>
+        <table>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+            </tr>
+            {% for tache in taches %}
+            <tr>
+                <td>{{ tache[1] }}</td> <!-- nom -->
+                <td>{{ tache[2] }}</td> <!-- description -->
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
