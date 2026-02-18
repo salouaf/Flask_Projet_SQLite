@@ -139,7 +139,7 @@ def liste_taches():
     return render_template('liste_taches.html', taches=taches)
 
 
-@app.route('/tache/ajouter', methods=['GET', 'POST'])
+@app.route('/ajouter_tache', methods=['GET', 'POST'])
 def ajouter_tache():
     if request.method == 'POST':
         nom = request.form['nom']
