@@ -2,29 +2,69 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Gestion des tâches - Accueil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Gestion de tâches</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f4f7; margin: 0; }
-        header { background: #007BFF; color: white; padding: 20px; text-align: center; }
-        main { padding: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .card { background: white; padding: 20px; border-radius: 10px; width: 250px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
-        .card:hover { transform: translateY(-5px); }
-        .card a { text-decoration: none; color: #007BFF; font-weight: bold; display: block; margin-top: 15px; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: rgba(255,255,255,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #fff;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        nav a {
+            text-decoration: none;
+            margin: 0 20px;
+            padding: 15px 30px;
+            background-color: #fff;
+            color: #4CAF50;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        nav a:hover {
+            background-color: #4CAF50;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+        section {
+            text-align: center;
+            margin-top: 50px;
+        }
+        section p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Gestion des Tâches</h1>
+        <h1>Bienvenue dans votre gestionnaire de tâches</h1>
     </header>
-    <main>
-        <div class="card">
-            <h2>Liste des tâches</h2>
-            <a href="{{ url_for('liste_taches') }}">Voir les tâches</a>
-        </div>
-        <div class="card">
-            <h2>Ajouter une tâche</h2>
-            <a href="{{ url_for('ajouter_tache') }}">Ajouter</a>
-        </div>
-    </main>
+
+    <section>
+        <p>Utilisez les boutons ci-dessous pour naviguer dans votre application :</p>
+        <nav>
+            <a href="/ajouter_tache">Ajouter une tâche</a>
+            <a href="/liste_taches">Voir toutes les tâches</a>
+        </nav>
+    </section>
 </body>
 </html>
