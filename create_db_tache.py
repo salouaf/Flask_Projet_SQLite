@@ -13,3 +13,7 @@ cur.execute("INSERT INTO taches (nom, description) VALUES (?, ?)",('Ajouter une 
 cur.execute("INSERT INTO taches (nom, description) VALUES (?, ?)",('Afficher les tâches', 'Liste visible avec titre et description'))
 cur.execute("INSERT INTO taches (nom, description) VALUES (?, ?)",('Accueil', 'Page d'accueil avec navigation vers les autres fonctionnalités '))
 cur.execute("INSERT INTO taches (nom, description) VALUES (?, ?)",('Suppression d’une tâche', 'permettre la suppression d'une tâche '))
+
+# Sauvegarder et fermer
+connection.commit()
+connection.close()
