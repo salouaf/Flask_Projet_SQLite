@@ -125,9 +125,8 @@ def list_books():
 
 #Application taches
 @app.route('/accueil')
-def accueiltaches():
+def accueil():
     return render_template('accueil.html')
-
 
 @app.route('/taches')
 def lister_taches():
