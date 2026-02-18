@@ -135,10 +135,14 @@ if __name__ == "__main__":
 
 #Application taches
 @app.route('/taches')
-def ReadBDDtache():
+def lister_taches():
     conn = sqlite3.connect('database_tache.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM taches;')
+    cursor.execute('SELECT * FROM taches')
     data = cursor.fetchall()
     conn.close()
-    return render_template('read_data.html', data=data)
+    # Ici, on peut renvoyer un template HTML pour afficher la liste
+    return render_template('liste_taches.html', taches=data)
+
+
+
