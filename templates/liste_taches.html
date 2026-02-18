@@ -3,13 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des tâches</title>
+    <style>
+        /* Style global */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container central */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        /* Liste des tâches */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #e3f2fd;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-left: 5px solid #2196F3;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Bouton pour ajouter une tâche */
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1976D2;
+        }
+
+        /* Petite info en bas */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <h1>Liste des tâches</h1>
-    <ul>
-        {% for tache in taches %}
-            <li>{{ tache[1] }} : {{ tache[2] }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Liste des tâches</h1>
+        <ul>
+            {% for tache in taches %}
+                <li>{{ tache[1] }} : {{ tache[2] }}</li>
+            {% endfor %}
+        </ul>
+        <div class="footer">
+            Gestionnaire de tâches - Projet IT
+        </div>
+    </div>
 </body>
 </html>
