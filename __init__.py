@@ -143,6 +143,3 @@ def lister_taches():
     conn.close()
     # Ici, on peut renvoyer un template HTML pour afficher la liste
     return render_template('liste_taches.html', taches=data)
-
-
-
