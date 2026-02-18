@@ -130,3 +130,15 @@ def list_books():
     return render_template('read_data.html', data=data)
 if __name__ == "__main__":
   app.run(debug=True)
+
+
+
+#Application taches
+@app.route('/taches')
+def ReadBDDtache():
+    conn = sqlite3.connect('database_tache.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM taches;')
+    data = cursor.fetchall()
+    conn.close()
+    return render_template('read_data.html', data=data)
