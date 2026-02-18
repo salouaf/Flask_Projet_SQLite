@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des tâches</title>
+</head>
+<body>
+    <h1>Liste des tâches</h1>
+    <ul>
+        {% for tache in taches %}
+            <li>{{ tache[1] }} : {{ tache[2] }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('ajouter_tache') }}">Ajouter une tâche</a>
+</body>
+</html>
