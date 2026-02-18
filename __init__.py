@@ -128,8 +128,7 @@ def list_books():
     data = cursor.fetchall()
     conn.close()
     return render_template('read_data.html', data=data)
-if __name__ == "__main__":
-  app.run(debug=True)
+
 
 
 
@@ -143,3 +142,6 @@ def lister_taches():
     conn.close()
     # Ici, on peut renvoyer un template HTML pour afficher la liste
     return render_template('liste_taches.html', taches=data)
+
+if __name__ == "__main__":
+  app.run(debug=True)
