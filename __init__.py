@@ -124,6 +124,11 @@ def list_books():
 
 
 #Application taches
+@app.route('/accueil')
+def accueiltaches():
+    return render_template('accueil.html')
+
+
 @app.route('/taches')
 def lister_taches():
     conn = sqlite3.connect('database_tache.db')
