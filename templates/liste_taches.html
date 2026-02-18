@@ -16,33 +16,17 @@
 </head>
 <body>
     <h1>Liste des tâches</h1>
-    <table>
-        <tr>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>Date échéance</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-        {% for tache in taches %}
-        <tr>
-            <td>{{ tache[1] }}</td>
-            <td>{{ tache[2] }}</td>
-            <td>{{ tache[3] }}</td>
-            <td>{{ tache[4] }}</td>
-            <td>
-                <a class="button" href="{{ url_for('detail_tache', id=tache[0]) }}">Voir</a>
-                <form style="display:inline;" action="{{ url_for('supprimer_tache', id=tache[0]) }}" method="post">
-                    <button class="button red" type="submit">Supprimer</button>
-                </form>
-                {% if tache[4] != 'Terminée' %}
-                <form style="display:inline;" action="{{ url_for('terminer_tache', id=tache[0]) }}" method="post">
-                    <button class="button" type="submit">Terminer</button>
-                </form>
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+   <table>
+    <tr>
+        <th>Titre</th>
+        <th>Description</th>
+    </tr>
+    {% for tache in taches %}
+    <tr>
+        <td>{{ tache[0] }}</td> <!-- tache[0] = nom -->
+        <td>{{ tache[1] }}</td> <!-- tache[1] = description -->
+    </tr>
+    {% endfor %}
+</table>
 </body>
 </html>
