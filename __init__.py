@@ -128,29 +128,31 @@ def list_books():
 def accueil():
     return render_template('accueil.html')
 
-@app.route('/taches')
-def lister_taches():
+@app.route('/liste_taches')
+def liste_taches():
+    import sqlite3
     conn = sqlite3.connect('database_tache.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM taches')
-    data = cursor.fetchall()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM taches")
+    taches = cur.fetchall()
     conn.close()
-    # Ici, on peut renvoyer un template HTML pour afficher la liste
-    return render_template('liste_taches.html', taches=data)
+    return render_template('liste_taches.html', taches=taches)
+
 
 @app.route('/tache/ajouter', methods=['GET', 'POST'])
 def ajouter_tache():
     if request.method == 'POST':
         nom = request.form['nom']
         description = request.form['description']
-        date_echeance = request.form['date_echeance']
+
         conn = sqlite3.connect('database_tache.db')
         cur = conn.cursor()
-        cur.execute("INSERT INTO taches (nom, description, date_echeance, status) VALUES (?, ?, ?, 'Ouverte')",
-                    (nom, description, date_echeance))
+        cur.execute("INSERT INTO taches (nom, description) VALUES (?, ?)", (nom, description))
         conn.commit()
         conn.close()
-        return redirect(url_for('liste_taches'))
+
+        return redirect(url_for('liste_taches'))  # redirige vers la liste après ajout
+
     return render_template('ajouter_tache.html')
 
 # Détail d'une tâche
